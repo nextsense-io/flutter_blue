@@ -4,6 +4,8 @@
 
 part of flutter_blue;
 
+enum ConnectionPriority { balanced, high, low_power }
+
 class BluetoothDevice {
   final DeviceIdentifier id;
   final String name;
@@ -130,6 +132,14 @@ class BluetoothDevice {
 
     return FlutterBlue.instance._channel
         .invokeMethod('requestMtu', request.writeToBuffer());
+  }
+
+  Future requestConnectionPriority(ConnectionPriority priority) async {
+    var request = protos.RequestConnectionPriorityRequest.create()
+      ..remoteId = id.toString()
+      ..priority = priority.index
+      ..success = false;
+    await FlutterBlue.instance._channel.invokeMethod('RequestConnectionPriority', request.writeToBuffer());
   }
 
   /// Indicates whether the Bluetooth Device can send a write without response

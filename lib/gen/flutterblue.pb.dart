@@ -6,6 +6,7 @@
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
 
 import 'dart:core' as $core;
+import 'dart:core';
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
@@ -1996,4 +1997,43 @@ class MtuSizeResponse extends $pb.GeneratedMessage {
   $core.bool hasMtu() => $_has(1);
   @$pb.TagNumber(2)
   void clearMtu() => clearField(2);
+}
+
+class RequestConnectionPriorityRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('RequestConnectionPriority')
+    ..aOS(1, 'remoteId')
+    ..a(2, 'priority', $pb.PbFieldType.O3)
+    ..aOB(3, 'success')
+    ..hasRequiredFields = false
+  ;
+
+  RequestConnectionPriorityRequest() : super();
+  RequestConnectionPriorityRequest.fromBuffer(List i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  RequestConnectionPriorityRequest.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  RequestConnectionPriorityRequest clone() => new RequestConnectionPriorityRequest()..mergeFromMessage(this);
+  RequestConnectionPriorityRequest copyWith(void Function(RequestConnectionPriorityRequest) updates) => super.copyWith((message) => updates(message as RequestConnectionPriorityRequest));
+  $pb.BuilderInfo get info_ => _i;
+  static RequestConnectionPriorityRequest create() => new RequestConnectionPriorityRequest();
+  RequestConnectionPriorityRequest createEmptyInstance() => create();
+  static $pb.PbList createRepeated() => new $pb.PbList();
+  static RequestConnectionPriorityRequest getDefault() => _defaultInstance ??= create()..freeze();
+  static RequestConnectionPriorityRequest _defaultInstance;
+  static void $checkItem(RequestConnectionPriorityRequest v) {
+    if (v is! RequestConnectionPriorityRequest) $pb.checkItemFailed(v, _i.qualifiedMessageName);
+  }
+
+  String get remoteId => $_getS(0, '');
+  set remoteId(String v) { $_setString(0, v); }
+  bool hasRemoteId() => $_has(0);
+  void clearRemoteId() => clearField(1);
+
+  int get priority => $_get(1, 0);
+  set priority(int v) { $_setSignedInt32(1, v); }
+  bool hasPriority() => $_has(1);
+  void clearPriority() => clearField(2);
+
+  bool get success => $_get(2, false);
+  set success(bool v) { $_setBool(2, v); }
+  bool hasSuccess() => $_has(2);
+  void clearSuccess() => clearField(3);
 }
