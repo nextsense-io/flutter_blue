@@ -645,7 +645,9 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
                     result.error("set_notification_error", e.getMessage(), null);
                     return;
                 }
-                result.success(gattServer.requestConnectionPriority(request.getPriority()));
+                boolean success = gattServer.requestConnectionPriority(request.getPriority());
+                log(LogLevel.INFO, "[requestConnectionPriority] status: " + success + " newState: " + request.getPriority());
+                result.success(success);
                 break;
             }
 
@@ -921,11 +923,10 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            log(LogLevel.DEBUG, "[onCharacteristicChanged] uuid: " + characteristic.getUuid().toString());
             Protos.OnCharacteristicChanged.Builder p = Protos.OnCharacteristicChanged.newBuilder();
             p.setRemoteId(gatt.getDevice().getAddress());
             p.setCharacteristic(ProtoMaker.from(gatt.getDevice(), characteristic, gatt));
-            invokeMethodUIThread("OnCharacteristicChanged", p.build().toByteArray());
+            // invokeMethodUIThread("OnCharacteristicChanged", p.build().toByteArray());
         }
 
         @Override
