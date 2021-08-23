@@ -926,7 +926,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
             Protos.OnCharacteristicChanged.Builder p = Protos.OnCharacteristicChanged.newBuilder();
             p.setRemoteId(gatt.getDevice().getAddress());
             p.setCharacteristic(ProtoMaker.from(gatt.getDevice(), characteristic, gatt));
-            // invokeMethodUIThread("OnCharacteristicChanged", p.build().toByteArray());
+            invokeMethodUIThread("OnCharacteristicChanged", p.build().toByteArray());
         }
 
         @Override
